@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @ApplicationScoped
-public class BoardGameDAO {
+public class BoardGamesDAO {
     @PersistenceContext
     private EntityManager em;
 
@@ -22,5 +22,9 @@ public class BoardGameDAO {
 
     public void persist(BoardGame boardGame){
         this.em.persist(boardGame);
+    }
+
+    public BoardGame findOne(Integer id) {
+        return em.find(BoardGame.class, id);
     }
 }

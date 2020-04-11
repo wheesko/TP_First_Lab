@@ -8,13 +8,15 @@
 <h:body>
     <h2>My board game list:</h2>
     <ol>
-        <ui:repeat value="#{boardGames.allEntities}" var="boardGame">
-            <li>#{boardGame.name}</li>
+        <ui:repeat value="#{boardGames.allBoardGames}" var="boardGame">
+            <li>
+                <h:link value="#{boardGame.name}" outcome="gameSessions?boardGameId=#{boardGame.id}"/>
+            </li>
         </ui:repeat>
     </ol>
     <h:form>
         <h:inputText value="#{boardGames.boardGameToCreate.name}" required="true" />
-        <h:commandButton value="Add new entity" action="#{boardGames.createEntity}" />
+        <h:commandButton value="Add new entity" action="#{boardGames.createBoardGame}" />
     </h:form>
 </h:body>
 </html>

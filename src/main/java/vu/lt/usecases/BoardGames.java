@@ -1,52 +1,41 @@
 package vu.lt.usecases;
 
+import lombok.Getter;
+import lombok.Setter;
+import vu.lt.entities.BoardGame;
+import vu.lt.persistence.BoardGamesDAO;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.io.Serializable;
-
-import vu.lt.entities.BoardGame;
-import vu.lt.persistence.BoardGameDAO;
-
 import java.util.List;
 
 @Model
-public class BoardGames implements Serializable {
+public class BoardGames {
+
     @Inject
-    private BoardGameDAO boardGameDAO;
+    private BoardGamesDAO boardGamesDAO;
 
-    private BoardGame entityToCreate = new BoardGame();
+    @Getter
+    @Setter
+    private BoardGame boardGameToCreate = new BoardGame();
 
-    private List<BoardGame> allEntities;
+    @Getter
+    private List<BoardGame> allBoardGames;
 
     @PostConstruct
-    public void init() {
-        loadAllEntities();
-    }
-    public void loadAllEntities() {
-        this.allEntities = boardGameDAO.loadAll();
+    public void init(){
+        loadAllBoardGames();
     }
 
     @Transactional
-    public String createEntity(){
-        this.boardGameDAO.persist(entityToCreate);
+    public String createBoardGame(){
+        this.boardGamesDAO.persist(boardGameToCreate);
         return "success";
     }
 
-    public BoardGame getBoardGameToCreate() {
-        return entityToCreate;
-    }
-
-    public void setBoardGameToCreate(BoardGame entityToCreate) {
-        this.entityToCreate = entityToCreate;
-    }
-
-    public List<BoardGame> getAllEntities() {
-        return allEntities;
-    }
-
-    public void setAllEntities(List<BoardGame> allEntities) {
-        this.allEntities = allEntities;
+    private void loadAllBoardGames(){
+        this.allBoardGames = boardGamesDAO.loadAll();
     }
 }
