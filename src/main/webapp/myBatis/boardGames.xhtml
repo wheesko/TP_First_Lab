@@ -9,7 +9,7 @@
     <h2>My board games:</h2>
     <ol>
         <ui:repeat value="#{boardGamesMyBatis.allBoardGames}" var="boardGame">
-            <li><h:link value="#{boardGame.name}" outcome="gameSessions?boardGameId=#{boardGame.id}" /></li>
+            <li><h:link value="#{boardGame.name}" outcome="/myBatis/gameSessions?boardGameId=#{boardGame.id}" /></li>
         </ui:repeat>
     </ol>
     <h:form>

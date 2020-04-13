@@ -13,6 +13,9 @@
     <table>
         <tr>
             <th>
+                Date played
+            </th>
+            <th>
                 Winner
             </th>
             <th>
@@ -22,17 +25,33 @@
         <ui:repeat value="#{gameSessionsForBoardGame.boardGame.gameSessions}" var="gameSession">
             <tr>
                 <td>
-                    #{gameSession.winnerName}
+                    <h:outputText value="#{gameSession.datePlayed}" >
+                        <f:convertDateTime pattern="yyyy-MM-dd" timeZone="GMT+3"/>
+                    </h:outputText>
                 </td>
                 <td>
-                    #{gameSession.score}
+                    <ui:fragment rendered="#{not empty gameSession.winnerName}">
+                        #{gameSession.winnerName}
+                    </ui:fragment>
+                    <ui:fragment rendered="#{empty gameSession.winnerName}">
+                        <h:link outcome="gameSessionDetails?gameSessionId=#{gameSession.id}" value="Add winner"/>
+                    </ui:fragment>
+                </td>
+                <td>
+                    <ui:fragment rendered="#{not empty gameSession.winnerName}">
+                        #{gameSession.score}
+                    </ui:fragment>
+                    <ui:fragment rendered="#{empty gameSession.winnerName}">
+                        -
+                    </ui:fragment>
                 </td>
             </tr>
         </ui:repeat>
     </table>
     <h:form>
-        <h:inputText a:placeholder="Winner name" value="#{gameSessionsForBoardGame.gameSessionToCreate.winnerName}" required="true" />
-        <h:inputText a:placeholder="Score" value="#{gameSessionsForBoardGame.gameSessionToCreate.score}" required="true" />
+        <h:inputText a:placeholder="Date played" value="#{gameSessionsForBoardGame.gameSessionToCreate.datePlayed}" required="true">
+            <f:convertDateTime pattern="yyyy-MM-dd"/>
+        </h:inputText>
         <h:commandButton value="Add game session" action="#{gameSessionsForBoardGame.createGameSession}" >
             <f:param name="boardGameId" value="#{gameSessionsForBoardGame.boardGame.id}" />
         </h:commandButton>

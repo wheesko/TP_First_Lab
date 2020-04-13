@@ -14,4 +14,12 @@ public class GameSessionsDAO {
     public void persist(GameSession gameSession){
         this.em.persist(gameSession);
     }
+
+    public GameSession findOne(Integer id) {
+        return em.find(GameSession.class, id);
+    }
+
+    public GameSession update(GameSession gameSession) {
+        return em.merge(gameSession);
+    }
 }

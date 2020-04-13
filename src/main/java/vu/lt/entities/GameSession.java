@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 @javax.persistence.Entity
@@ -29,9 +30,16 @@ public class GameSession implements Serializable {
     @Column(name = "NAME")
     private String winnerName;
 
+    @Column(name = "DATE_PLAYED")
+    private Date datePlayed;
+
     @Min(0)
     @Column(name = "SCORE")
     private Integer score;
+
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
 
     public GameSession() {
     }

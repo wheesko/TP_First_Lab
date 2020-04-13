@@ -40,8 +40,8 @@ public class GameSessionsForBoardGame {
     public void init() {
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        Integer teamId = Integer.parseInt(requestParameters.get("boardGameId"));
-        this.boardGame = boardGamesDAO.findOne(teamId);
+        Integer boardGameId = Integer.parseInt(requestParameters.get("boardGameId"));
+        this.boardGame = boardGamesDAO.findOne(boardGameId);
     }
 
     @Transactional

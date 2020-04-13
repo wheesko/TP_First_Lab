@@ -5,14 +5,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://java.sun.com/jsf/core">
-<h:head/>
 <h:head>
     <link rel="stylesheet" type="text/css" href="../table.css"/>
 </h:head>
 <h:body>
-    <h2>Games played in #{gameSessionsForBoardGame.boardGame.name}:</h2>
+    <h2>Games played in #{gameSessionsMyBatis.boardGame.name} :</h2>
     <table>
         <tr>
+            <th>
+                Date played
+            </th>
             <th>
                 Winner
             </th>
@@ -20,22 +22,38 @@
                 Score
             </th>
         </tr>
-        <ui:repeat value="#{gameSessionsForBoardGame.boardGame.gameSessions}" var="gameSession">
+        <ui:repeat value="#{gameSessionsMyBatis.gameSessionList}" var="gameSession">
             <tr>
                 <td>
-                    #{gameSession.winnerName}
+                    <h:outputText value="#{gameSession.datePlayed}" >
+                        <f:convertDateTime pattern="yyyy-MM-dd" timeZone="GMT+3"/>
+                    </h:outputText>
                 </td>
                 <td>
-                    #{gameSession.score}
+                    <ui:fragment rendered="#{not empty gameSession.name}">
+                        #{gameSession.name}
+                    </ui:fragment>
+                    <ui:fragment rendered="#{empty gameSession.name}">
+                        <h:link outcome="/myBatis/gameSessionDetailsMyBatis?gameSessionId=#{gameSession.id}" value="Add winner"/>
+                    </ui:fragment>
+                </td>
+                <td>
+                    <ui:fragment rendered="#{not empty gameSession.name}">
+                        #{gameSession.score}
+                    </ui:fragment>
+                    <ui:fragment rendered="#{empty gameSession.name}">
+                        -
+                    </ui:fragment>
                 </td>
             </tr>
         </ui:repeat>
     </table>
     <h:form>
-        <h:inputText a:placeholder="Winner name" value="#{gameSessionsForBoardGame.gameSessionToCreate.winnerName}" required="true" />
-        <h:inputText a:placeholder="Score" value="#{gameSessionsForBoardGame.gameSessionToCreate.score}" required="true" />
-        <h:commandButton value="Add game session" action="#{gameSessionsForBoardGame.createGameSession}" >
-            <f:param name="boardGameId" value="#{gameSessionsForBoardGame.boardGame.id}" />
+        <h:inputText a:placeholder="Date played" value="#{gameSessionsMyBatis.gameSessionToCreate.datePlayed}" required="true">
+            <f:convertDateTime pattern="yyyy-MM-dd"/>
+        </h:inputText>
+        <h:commandButton value="Add game session" action="#{gameSessionsMyBatis.createGameSession}" >
+            <f:param name="boardGameId" value="#{gameSessionsMyBatis.boardGame.id}" />
         </h:commandButton>
     </h:form>
     <h:link outcome="/myBatis/boardGames" value="Back to board games page"/>
