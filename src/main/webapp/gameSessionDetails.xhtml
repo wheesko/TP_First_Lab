@@ -24,6 +24,21 @@
         </h:commandButton>
         <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
     </h:form>
+    <h:form>
+        <h:outputText value="#{selectRandomWinner.randomWinnerChoosingStatus}" />
+        <h:inputText
+            a:placeholder="Enter comma seperated names"
+            value="#{selectRandomWinner.winnersList}"
+            required="true"
+        />
+        <br/>
+        <h:commandButton
+            value="Tied game? Select a random winner" disabled="#{selectRandomWinner.winnerGenerationRunning}"
+            action="#{selectRandomWinner.generateNewRandomWinner()}"
+        >
+            <f:param name="gameSessionId" value="#{updateGameSessionDetails.gameSession.id}" />
+        </h:commandButton>
+    </h:form>
     <h:link outcome="index" value="Back to home page"/>
 </h:body>
 </html>
