@@ -15,8 +15,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <jakartaee.api.version>8.0.0</jakartaee.api.version>
   </properties>
 
@@ -31,7 +31,7 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-      <version>1.4.200</version>
+      <version>1.4.196</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -60,7 +60,7 @@
           <artifactId>mybatis-generator-maven-plugin</artifactId>
           <version>1.4.0</version>
           <configuration>
-            <contexts>EntityDB</contexts>
+            <contexts>BoardGameDB</contexts>
             <verbose>true</verbose>
           </configuration>
           <executions>
@@ -75,13 +75,7 @@
             <dependency>
               <groupId>com.h2database</groupId>
               <artifactId>h2</artifactId>
-              <version>1.4.195</version>
-            </dependency>
-            <dependency>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-              <version>1.16.16</version>
-              <scope>provided</scope>
+              <version>1.4.196</version>
             </dependency>
           </dependencies>
         </plugin>

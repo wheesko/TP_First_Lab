@@ -5,11 +5,12 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
 <h:head>
-    <link rel="stylesheet" type="text/css" href="table.css"/>
+    <link rel="stylesheet" type="text/css" href="../table.css"/>
 </h:head>
 <h:body>
-    <h2>Games played in #{gameSessionsForBoardGame.boardGame.name} :</h2>
+    <h2>Games played in #{gameSessionsForBoardGame.boardGame.name}:</h2>
     <table>
         <tr>
             <th>
@@ -37,5 +38,6 @@
             <f:param name="boardGameId" value="#{gameSessionsForBoardGame.boardGame.id}" />
         </h:commandButton>
     </h:form>
+    <h:link outcome="/myBatis/boardGames" value="Back to board games page"/>
 </h:body>
 </html>

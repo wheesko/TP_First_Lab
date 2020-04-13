@@ -16,7 +16,8 @@
     </ol>
     <h:form>
         <h:inputText value="#{boardGames.boardGameToCreate.name}" required="true" />
-        <h:commandButton value="Add new entity" action="#{boardGames.createBoardGame}" />
+        <h:commandButton value="Add new board game" action="#{boardGames.createBoardGame}" />
     </h:form>
+    <h:link outcome="myBatis/boardGames" value="MyBatis implemetation"/>
 </h:body>
 </html>

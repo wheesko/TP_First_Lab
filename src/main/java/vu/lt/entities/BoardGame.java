@@ -3,6 +3,7 @@ package vu.lt.entities;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.List;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class BoardGame implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "boardGame")
-    private List<GameSession> gameSessions;
+    private List<GameSession> gameSessions = new ArrayList<>();
 
     public BoardGame() {
     }

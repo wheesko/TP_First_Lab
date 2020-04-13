@@ -29,7 +29,6 @@ public class GameSession implements Serializable {
     @Column(name = "NAME")
     private String winnerName;
 
-    @Size(max = 50)
     @Min(0)
     @Column(name = "SCORE")
     private Integer score;

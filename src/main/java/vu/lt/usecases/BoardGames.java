@@ -32,7 +32,7 @@ public class BoardGames {
     @Transactional
     public String createBoardGame(){
         this.boardGamesDAO.persist(boardGameToCreate);
-        return "success";
+        return "index?faces-redirect=true";
     }
 
     private void loadAllBoardGames(){

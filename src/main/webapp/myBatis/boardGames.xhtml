@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head/>
+<h:body>
+    <h2>My board games:</h2>
+    <ol>
+        <ui:repeat value="#{boardGamesMyBatis.allBoardGames}" var="boardGame">
+            <li><h:link value="#{boardGame.name}" outcome="gameSessions?boardGameId=#{boardGame.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText value="#{boardGamesMyBatis.boardGameToCreate.name}" required="true" />
+        <h:commandButton value="Add new board game" action="#{boardGamesMyBatis.createBoardGame}" />
+    </h:form>
+    <h:link value="Back to index" outcome="/index"/>
+</h:body>
+</html>
