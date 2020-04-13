@@ -3,6 +3,7 @@ package vu.lt.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
+import vu.lt.interceptors.LoggedInvocation;
 import vu.lt.myBatis.dao.BoardGameMapper;
 import vu.lt.myBatis.dao.GameSessionMapper;
 import vu.lt.myBatis.model.GameSession;
@@ -31,7 +32,6 @@ public class UpdateGameSessionDetailsMyBatis implements Serializable {
 
     @PostConstruct
     private void init() {
-        System.out.println("UpdateGameSessionMyBatis INIT CALLED");
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         Integer gameSessionId = Integer.parseInt(requestParameters.get("gameSessionId"));
@@ -40,6 +40,7 @@ public class UpdateGameSessionDetailsMyBatis implements Serializable {
     }
 
     @Transactional
+    @LoggedInvocation
     public String updateGameSessionWinner() {
         try{
             gameSessionMapper.updateByPrimaryKey(this.gameSession);

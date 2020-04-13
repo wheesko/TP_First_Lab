@@ -4,6 +4,7 @@ package vu.lt.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import vu.lt.entities.GameSession;
+import vu.lt.interceptors.LoggedInvocation;
 import vu.lt.persistence.GameSessionsDAO;
 
 import javax.annotation.PostConstruct;
@@ -28,7 +29,6 @@ public class UpdateGameSessionDetails implements Serializable {
 
     @PostConstruct
     private void init() {
-        System.out.println("UpdateGameSession INIT CALLED");
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         Integer gameSessionId = Integer.parseInt(requestParameters.get("gameSessionId"));
@@ -36,6 +36,7 @@ public class UpdateGameSessionDetails implements Serializable {
     }
 
     @Transactional
+    @LoggedInvocation
     public String updateGameSessionWinner() {
         try{
             gameSessionsDAO.update(this.gameSession);
